@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooltip com Roboto</title>
+    <title>Tooltip Responsivo</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
     <style>
@@ -14,6 +14,7 @@
             height: 100vh;
             margin: 0;
             background-color: transparent; /* Fundo transparente */
+            overflow: hidden; /* Evita barras de scroll */
         }
         .tooltip {
             position: relative;
@@ -22,35 +23,56 @@
         }
         .tooltip .tooltip-text {
             visibility: hidden;
-            width: 180px; /* Largura ajustada */
-            background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+            width: 180px;
+            background-color: rgba(0, 0, 0, 0.8);
             color: #fff;
             text-align: center;
             border-radius: 4px;
             padding: 5px;
-            font-family: 'Roboto', sans-serif; /* Fonte Roboto */
-            font-size: 12px; /* Tamanho de fonte ajustado */
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
             position: absolute;
             z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, transform 0.3s;
         }
         .tooltip:hover .tooltip-text {
             visibility: visible;
             opacity: 1;
         }
+        .tooltip .tooltip-text.position-top {
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .tooltip .tooltip-text.position-bottom {
+            top: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .tooltip .tooltip-text.position-left {
+            top: 50%;
+            right: 125%;
+            transform: translateY(-50%);
+        }
+        .tooltip .tooltip-text.position-right {
+            top: 50%;
+            left: 125%;
+            transform: translateY(-50%);
+        }
         .material-icons {
-            font-size: 20px; /* Ajuste do tamanho do ícone */
+            font-size: calc(5vw + 5vh); /* Tamanho responsivo */
+            max-width: 100px; /* Limite máximo de largura */
+            max-height: 100px; /* Limite máximo de altura */
+            min-width: 24px; /* Limite mínimo de largura */
+            min-height: 24px; /* Limite mínimo de altura */
             vertical-align: middle;
         }
     </style>
 </head>
 <body>
     <div class="tooltip">
-        <span class="material-icons">help_outline</span>
+        <span class="material-icons">info</span>
         <span id="tooltip-text" class="tooltip-text">Mensagem Dinâmica</span>
     </div>
 
@@ -63,7 +85,18 @@
 
         // Definir o texto do tooltip dinamicamente
         const tooltipText = getQueryParam('tooltip') || 'Texto padrão';
-        document.getElementById('tooltip-text').textContent = tooltipText;
+        const tooltipPosition = getQueryParam('position') || 'top';
+
+        const tooltipElement = document.getElementById('tooltip-text');
+        tooltipElement.textContent = tooltipText;
+
+        // Adicionar a classe de posição dinâmica
+        const validPositions = ['top', 'bottom', 'left', 'right'];
+        if (validPositions.includes(tooltipPosition)) {
+            tooltipElement.classList.add(`position-${tooltipPosition}`);
+        } else {
+            tooltipElement.classList.add('position-top'); // Posição padrão
+        }
     </script>
 </body>
 </html>
