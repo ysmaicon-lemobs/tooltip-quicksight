@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooltip Dinâmico</title>
+    <title>Tooltip com Roboto</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -12,7 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: transparent; /* Fundo transparente */
         }
         .tooltip {
             position: relative;
@@ -21,12 +22,14 @@
         }
         .tooltip .tooltip-text {
             visibility: hidden;
-            width: 200px;
-            background-color: black;
+            width: 180px; /* Largura ajustada */
+            background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
             color: #fff;
             text-align: center;
             border-radius: 4px;
             padding: 5px;
+            font-family: 'Roboto', sans-serif; /* Fonte Roboto */
+            font-size: 12px; /* Tamanho de fonte ajustado */
             position: absolute;
             z-index: 1;
             bottom: 125%;
@@ -39,12 +42,16 @@
             visibility: visible;
             opacity: 1;
         }
+        .material-icons {
+            font-size: 20px; /* Ajuste do tamanho do ícone */
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
     <div class="tooltip">
         <span class="material-icons">help_outline</span>
-        <span id="tooltip-text" class="tooltip-text">Texto padrão</span>
+        <span id="tooltip-text" class="tooltip-text">Mensagem Dinâmica</span>
     </div>
 
     <script>
