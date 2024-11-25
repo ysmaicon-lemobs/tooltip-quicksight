@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooltip Example</title>
+    <title>Tooltip Dinâmico</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0; /* Cor de fundo opcional */
+            background-color: #f0f0f0;
         }
         .tooltip {
             position: relative;
@@ -21,7 +21,7 @@
         }
         .tooltip .tooltip-text {
             visibility: hidden;
-            width: 120px;
+            width: 200px;
             background-color: black;
             color: #fff;
             text-align: center;
@@ -29,7 +29,7 @@
             padding: 5px;
             position: absolute;
             z-index: 1;
-            bottom: 125%; /* Ajuste a posição */
+            bottom: 125%;
             left: 50%;
             transform: translateX(-50%);
             opacity: 0;
@@ -44,7 +44,19 @@
 <body>
     <div class="tooltip">
         <span class="material-icons">help_outline</span>
-        <span class="tooltip-text">Mais informações</span>
+        <span id="tooltip-text" class="tooltip-text">Texto padrão</span>
     </div>
+
+    <script>
+        // Função para obter parâmetros da URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Definir o texto do tooltip dinamicamente
+        const tooltipText = getQueryParam('tooltip') || 'Texto padrão';
+        document.getElementById('tooltip-text').textContent = tooltipText;
+    </script>
 </body>
 </html>
