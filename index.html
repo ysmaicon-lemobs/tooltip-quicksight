@@ -9,12 +9,11 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: transparent; /* Fundo transparente */
-            overflow: hidden; /* Evita barras de scroll */
+            background-color: transparent;
+            overflow: hidden;
         }
         .tooltip {
             position: relative;
@@ -72,7 +71,7 @@
 </head>
 <body>
     <div class="tooltip">
-        <span class="material-icons">info</span>
+        <span class="material-icons">info_outline</span>
         <span id="tooltip-text" class="tooltip-text">Mensagem Dinâmica</span>
     </div>
 
@@ -86,6 +85,7 @@
         // Definir o texto do tooltip dinamicamente
         const tooltipText = getQueryParam('tooltip') || 'Texto padrão';
         const tooltipPosition = getQueryParam('position') || 'top';
+        const iconAlignment = getQueryParam('align') || 'center';
 
         const tooltipElement = document.getElementById('tooltip-text');
         tooltipElement.textContent = tooltipText;
@@ -97,6 +97,15 @@
         } else {
             tooltipElement.classList.add('position-top'); // Posição padrão
         }
+
+        // Ajustar alinhamento horizontal do ícone
+        const bodyElement = document.body;
+        const validAlignments = {
+            left: 'flex-start',
+            center: 'center',
+            right: 'flex-end',
+        };
+        bodyElement.style.justifyContent = validAlignments[iconAlignment] || 'center';
     </script>
 </body>
 </html>
