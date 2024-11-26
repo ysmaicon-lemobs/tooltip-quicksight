@@ -62,12 +62,13 @@
         .material-icons {
             font-size: 30px;
             vertical-align: middle;
+            color: #000; /* Cor padrão */
         }
     </style>
 </head>
 <body>
     <div class="tooltip">
-        <span class="material-icons">info_outline</span>
+        <span id="icon" class="material-icons">info_outline</span>
         <span id="tooltip-text" class="tooltip-text">Mensagem Dinâmica</span>
     </div>
 
@@ -82,8 +83,11 @@
         const tooltipText = getQueryParam('tooltip') || 'Texto padrão';
         const tooltipPosition = getQueryParam('position') || 'top';
         const iconAlignment = getQueryParam('align') || 'center';
+        const iconColor = getQueryParam('iconColor') || '#000'; // Cor padrão do ícone
 
         const tooltipElement = document.getElementById('tooltip-text');
+        const iconElement = document.getElementById('icon');
+
         tooltipElement.textContent = tooltipText;
 
         // Adicionar a classe de posição dinâmica
@@ -102,6 +106,9 @@
             right: 'flex-end',
         };
         bodyElement.style.justifyContent = validAlignments[iconAlignment] || 'center';
+
+        // Alterar a cor do ícone
+        iconElement.style.color = iconColor;
     </script>
 </body>
 </html>
