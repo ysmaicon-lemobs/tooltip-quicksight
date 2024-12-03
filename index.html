@@ -61,7 +61,7 @@
             transform: translateY(-50%);
         }
         .material-icons {
-            font-size: 30px;
+            font-size: 26px; /* Tamanho padrão */
             vertical-align: middle;
             color: #000; /* Cor padrão */
         }
@@ -86,6 +86,7 @@
         const iconAlignment = getQueryParam('align') || 'center'; // Alinhamento horizontal
         const verticalAlignment = getQueryParam('valign') || 'center'; // Alinhamento vertical
         const iconColor = getQueryParam('iconColor') || '#000'; // Cor padrão do ícone
+        const iconSize = getQueryParam('iconSize') || '26px'; // Tamanho padrão do ícone
 
         const tooltipElement = document.getElementById('tooltip-text');
         const iconElement = document.getElementById('icon');
@@ -119,6 +120,9 @@
 
         // Alterar a cor do ícone
         iconElement.style.color = iconColor;
+
+        // Definir o tamanho do ícone
+        iconElement.style.fontSize = iconSize;
     </script>
 </body>
 </html>
